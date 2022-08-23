@@ -1,15 +1,21 @@
 <template>
   <div class="app">
     <Navbar />
-    <router-view />
-
+    <div class="container">
+      <div class="row">
+        <CountriesList :countries= "countries" />
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
+import CountriesList from './components/CountriesList.vue';
+
 export default {
-  components: { Navbar },
+  components: { Navbar, CountriesList },
 };
 </script>
 
