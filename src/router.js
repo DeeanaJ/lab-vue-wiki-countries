@@ -8,6 +8,10 @@ const routes = [
     name: 'root',
     component: HomeView
   },
+  {
+    path: '/:countryCode',
+    name: 'countryDetails',
+ },
 //   {
 //     path: '/list',
 //     name: 'list',
