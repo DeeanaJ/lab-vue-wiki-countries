@@ -1,9 +1,10 @@
 <template>
   <div class="app">
     <Navbar />
+    <h1>{{ countries[0].name }}</h1>
     <div class="container">
       <div class="row">
-        <CountriesList :countries= "countries" />
+        <CountriesList />
         <router-view />
       </div>
     </div>
@@ -11,11 +12,22 @@
 </template>
 
 <script>
+import { mapActions, mapState} from 'pinia';
 import Navbar from './components/Navbar.vue';
 import CountriesList from './components/CountriesList.vue';
 
 export default {
+  name: 'App',
   components: { Navbar, CountriesList },
+  methods: {
+    ...mapActions(CountryStore, ['fetchCountries']),
+  },
+  computed: {
+    ...mapState(MyStore, ['countries']),
+  },
+  created() {
+    this.fetchCountries();
+  },
 };
 </script>
 
