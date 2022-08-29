@@ -1,29 +1,34 @@
 <template>
-  <div className="app">
-    <header className="app-header">
-      <img :src="logo" className="app-logo" alt="logo" />
-      <p>
-        Edit <code>src/app.js</code> and save to reload.
-      </p>
-      <a
-        className="app-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Vue
-      </a>
-    </header>
+  <div class="app">
+    <Navbar />
+    <div class="container">
+      <div class="row">
+        <CountriesList />
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import logo from './logo.svg';
-  export default {
-    data: () => ({
-      logo
-    })
-  }
+import { mapActions, mapState} from 'pinia';
+import Navbar from './components/Navbar.vue';
+import CountryStore from './store/CountryStore.js';
+import CountriesList from './components/CountriesList.vue';
+
+export default {
+  name: 'App',
+  components: { Navbar, CountriesList },
+  methods: {
+    ...mapActions(CountryStore, ['fetchCountries']),
+  },
+  computed: {
+    ...mapState(CountryStore, ['countries']),
+  },
+  created() {
+    this.fetchCountries();
+  },
+};
 </script>
 
 <style>
