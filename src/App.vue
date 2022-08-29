@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <Navbar />
-    <h1>{{ countries[0].name }}</h1>
     <div class="container">
       <div class="row">
         <CountriesList />
@@ -14,6 +13,7 @@
 <script>
 import { mapActions, mapState} from 'pinia';
 import Navbar from './components/Navbar.vue';
+import CountryStore from './store/CountryStore.js';
 import CountriesList from './components/CountriesList.vue';
 
 export default {
@@ -23,7 +23,7 @@ export default {
     ...mapActions(CountryStore, ['fetchCountries']),
   },
   computed: {
-    ...mapState(MyStore, ['countries']),
+    ...mapState(CountryStore, ['countries']),
   },
   created() {
     this.fetchCountries();
